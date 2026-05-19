@@ -1,0 +1,122 @@
+:root {
+    --bg-black: #000000;
+    --text-white: #EEEEEE;
+    --text-orange-dim: #E06A32; /* Para operadores y '0' en pantalla */
+    --accent-orange-bright: #FF6C3F; /* Para el botón '=', top bar icons */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    font-family: system-ui, -apple-system, sans-serif; /* Tipografía limpia */
+}
+
+body {
+    background-color: var(--bg-black);
+    height: 100vh;
+    overflow: hidden;
+    color: var(--text-white);
+}
+
+.calculator {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.display-container {
+    flex: 1;
+    background-color: var(--bg-black);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px 20px 0;
+    cursor: pointer;
+    border-bottom: 0.5px solid rgba(224, 106, 50, 0.1); /* Línea sutil */
+}
+
+/* Indicación visual sutil del Trigger Secreto */
+#trigger-area.magic-active {
+    border: 2px solid var(--accent-orange-bright);
+    transition: border 0.3s ease;
+}
+
+.top-row {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+.top-icon {
+    width: 20px;
+    height: 20px;
+    /* Los iconos están invisibles, pero puedes añadir placeholders aquí si quieres */
+    color: var(--text-orange-dim);
+    font-size: 1.2rem;
+}
+
+.display {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+#previous-display {
+    font-size: 1.5rem;
+    min-height: 1.5rem;
+    color: var(--text-orange-dim);
+    margin-bottom: 5px;
+}
+
+#current-display {
+    font-size: 5rem;
+    color: var(--text-orange-dim);
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    padding: 20px;
+    background-color: var(--bg-black);
+}
+
+.btn {
+    border: none;
+    border-radius: 10px; /* Redondeado por defecto, para operadores */
+    font-size: 2rem;
+    padding: 25px 0;
+    cursor: pointer;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn:active {
+    opacity: 0.6;
+}
+
+.btn-num {
+    color: var(--text-white);
+}
+
+.btn-op {
+    color: var(--text-orange-dim);
+}
+
+.btn-special {
+    color: var(--text-white);
+    font-size: 1.5rem;
+}
+
+.btn-equals {
+    background-color: var(--accent-orange-bright);
+    color: white;
+    font-size: 2.5rem;
+    border-radius: 50%; /* Perfectamente circular */
+}
