@@ -6,49 +6,45 @@
     <title>Calculadora</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="icon-192.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body>
     <div class="calculator">
+        <div class="top-bar-android">
+            <span class="material-icons-mock">&#x2924;</span> <span class="material-icons-mock active-icon">&#x3D;</span> <span class="material-icons-mock">&#x229E;</span> <span class="material-icons-mock">&#x2302;</span> <span class="material-icons-mock">&#x22EE;</span> </div>
+
         <div id="trigger-area" class="display-container">
-            <div class="top-row">
-                <div class="top-icon"></div> <div class="top-icon"></div> <div class="top-icon"></div> <div class="top-icon"></div> <div class="top-icon"></div> </div>
-            <div class="display">
-                <div id="previous-display"></div>
-                <div id="current-display">0</div>
-            </div>
+            <div id="previous-display"></div>
+            <div id="current-display">0</div>
         </div>
 
+        <div class="divider"></div>
+
         <div class="buttons">
-            <button class="btn btn-op btn-ac" onclick="clearAll()">AC</button>
-            <button class="btn btn-op" onclick="deleteNumber()">
-                &#x232B;
-            </button>
-            <button class="btn btn-op" onclick="appendOperator('%')">%</button>
-            <button class="btn btn-op" onclick="appendOperator('÷')">&divide;</button>
+            <button class="btn btn-orange" onclick="clearAll()">AC</button>
+            <button class="btn btn-orange" onclick="deleteNumber()">&#x232B;</button>
+            <button class="btn btn-orange" onclick="appendOperator('%')">%</button>
+            <button class="btn btn-orange font-large" onclick="appendOperator('÷')">&divide;</button>
             
             <button class="btn btn-num" onclick="appendNumber(7)">7</button>
             <button class="btn btn-num" onclick="appendNumber(8)">8</button>
             <button class="btn btn-num" onclick="appendNumber(9)">9</button>
-            <button class="btn btn-op" onclick="appendOperator('×')">&times;</button>
+            <button class="btn btn-orange font-large" onclick="appendOperator('×')">&times;</button>
             
             <button class="btn btn-num" onclick="appendNumber(4)">4</button>
             <button class="btn btn-num" onclick="appendNumber(5)">5</button>
             <button class="btn btn-num" onclick="appendNumber(6)">6</button>
-            <button class="btn btn-op" onclick="appendOperator('-')">&minus;</button>
+            <button class="btn btn-orange font-large" onclick="appendOperator('-')">&minus;</button>
             
             <button class="btn btn-num" onclick="appendNumber(1)">1</button>
             <button class="btn btn-num" onclick="appendNumber(2)">2</button>
             <button class="btn btn-num" onclick="appendNumber(3)">3</button>
-            <button class="btn btn-op" onclick="appendOperator('+')">&plus;</button>
+            <button class="btn btn-orange font-large" onclick="appendOperator('+')">&plus;</button>
             
-            <button class="btn btn-special" onclick="toggleScientific()">
-                &#x27f3;
-            </button>
+            <button class="btn btn-num font-small" onclick="toggleScientific()">&#x27F3;</button>
             <button class="btn btn-num" onclick="appendNumber(0)">0</button>
-            <button class="btn btn-num" onclick="appendNumber(',')">,</button>
+            <button class="btn btn-num font-large" onclick="appendNumber(',')">,</button>
             <button id="btn-equals" class="btn btn-equals" onclick="computeMagic()">=</button>
         </div>
     </div>
