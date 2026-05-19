@@ -1,8 +1,8 @@
 :root {
     --bg-black: #000000;
-    --text-white: #EEEEEE;
-    --text-orange-dim: #E06A32; /* Para operadores y '0' en pantalla */
-    --accent-orange-bright: #FF6C3F; /* Para el botón '=', top bar icons */
+    --text-gray-light: #A0A0A0; /* Números finos grisáceos como el original */
+    --orange-dim: #D9622B;      /* Operadores superiores y laterales */
+    --orange-bright: #FF6E40;   /* Círculo del igual */
 }
 
 * {
@@ -10,113 +10,139 @@
     margin: 0;
     padding: 0;
     user-select: none;
-    font-family: system-ui, -apple-system, sans-serif; /* Tipografía limpia */
+    font-family: 'Roboto', system-ui, -apple-system, sans-serif;
 }
 
 body {
     background-color: var(--bg-black);
     height: 100vh;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
-    color: var(--text-white);
 }
 
 .calculator {
     display: flex;
     flex-direction: column;
     height: 100%;
+    width: 100%;
 }
 
+/* Barra superior de iconos de Android */
+.top-bar-android {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 25px 5px;
+    background-color: var(--bg-black);
+}
+
+.material-icons-mock {
+    color: #555555;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.material-icons-mock.active-icon {
+    color: var(--orange-dim);
+    background-color: rgba(217, 98, 43, 0.15);
+    padding: 2px 8px;
+    border-radius: 6px;
+}
+
+/* Pantalla */
 .display-container {
     flex: 1;
-    background-color: var(--bg-black);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 10px 20px 0;
-    cursor: pointer;
-    border-bottom: 0.5px solid rgba(224, 106, 50, 0.1); /* Línea sutil */
-}
-
-/* Indicación visual sutil del Trigger Secreto */
-#trigger-area.magic-active {
-    border: 2px solid var(--accent-orange-bright);
-    transition: border 0.3s ease;
-}
-
-.top-row {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 10px;
-}
-
-.top-icon {
-    width: 20px;
-    height: 20px;
-    /* Los iconos están invisibles, pero puedes añadir placeholders aquí si quieres */
-    color: var(--text-orange-dim);
-    font-size: 1.2rem;
-}
-
-.display {
-    text-align: right;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-end;
+    padding: 20px;
+    background-color: var(--bg-black);
+    word-break: break-all;
+    overflow: hidden;
 }
 
 #previous-display {
-    font-size: 1.5rem;
-    min-height: 1.5rem;
-    color: var(--text-orange-dim);
-    margin-bottom: 5px;
+    font-size: 1.6rem;
+    color: #666666;
+    font-weight: 300;
+    min-height: 2rem;
+    margin-bottom: 10px;
+    text-align: right;
 }
 
 #current-display {
-    font-size: 5rem;
-    color: var(--text-orange-dim);
+    font-size: 4.8rem; /* Tamaño inicial */
+    color: var(--text-gray-light);
+    font-weight: 300;
+    text-align: right;
+    white-space: nowrap;
+    transition: font-size 0.1s ease-out;
+    width: 100%;
 }
 
+.divider {
+    height: 1px;
+    background-color: #1A1A1A;
+    margin: 0 20px;
+}
+
+/* Teclado Grid */
 .buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    padding: 20px;
+    gap: 12px;
+    padding: 25px 20px 35px;
     background-color: var(--bg-black);
 }
 
 .btn {
     border: none;
-    border-radius: 10px; /* Redondeado por defecto, para operadores */
-    font-size: 2rem;
-    padding: 25px 0;
-    cursor: pointer;
-    background-color: transparent;
+    background: transparent;
+    font-size: 2.1rem;
+    font-weight: 300; /* Estilo ultra fino nativo de Android */
+    height: 75px;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.btn:active {
-    opacity: 0.6;
+    cursor: pointer;
 }
 
 .btn-num {
-    color: var(--text-white);
+    color: var(--text-gray-light);
 }
 
-.btn-op {
-    color: var(--text-orange-dim);
+.btn-orange {
+    color: var(--orange-dim);
 }
 
-.btn-special {
-    color: var(--text-white);
+.font-large {
+    font-size: 2.6rem;
+}
+
+.font-small {
     font-size: 1.5rem;
+    color: #777777;
 }
 
+/* Botón igual idéntico a tu captura */
 .btn-equals {
-    background-color: var(--accent-orange-bright);
-    color: white;
-    font-size: 2.5rem;
-    border-radius: 50%; /* Perfectamente circular */
+    background-color: var(--orange-bright);
+    color: #FFFFFF;
+    font-size: 2.8rem;
+    font-weight: 400;
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    margin: 0 auto;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+}
+
+.btn:active {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+}
+
+.btn-equals:active {
+    opacity: 0.8;
 }
