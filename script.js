@@ -32,7 +32,7 @@ let touchTimer;
 triggerArea.addEventListener('touchstart', (e) => {
     touchTimer = setTimeout(() => {
         isMagicMode = !isMagicMode;
-        vibrate(250); // Feedback háptico secreto
+        vibrate(50); // CORREGIDO: Vibración única y muy sutil de confirmación
         console.log("Modo Magia: " + isMagicMode);
     }, 2500); // 2.5 segundos reteniendo la pantalla negra
 });
@@ -44,10 +44,10 @@ window.addEventListener('keydown', (e) => {
     if (!isMagicMode) return;
     if (e.key === 'VolumeUp') {
         volumeOverrideMinutes = 1;
-        vibrate([40, 40]);
+        vibrate(40); // Ajustado a toque sutil único
     } else if (e.key === 'VolumeDown') {
         volumeOverrideMinutes = 2;
-        vibrate([40, 40, 40]);
+        vibrate(40); // Ajustado a toque sutil único
     }
 });
 
@@ -66,6 +66,7 @@ function appendNumber(num) {
     updateDisplay();
 }
 
+// Corrección para el flujo de operadores en cascada
 function appendOperator(op) {
     if (activeOperator !== '' && !shouldResetScreen) {
         calculateNormal();
@@ -125,7 +126,7 @@ function startChivatoTimer() {
     pendingVibrationTimer = setInterval(() => {
         const now = new Date();
         if (now.getHours() === predictedHour && now.getMinutes() === predictedMinute && now.getSeconds() === 0) {
-            vibrate([150, 100, 150]); // Triple vibración sutil
+            vibrate(60); // CORREGIDO: Vibración única y ultra sutil (el chivato del tiempo)
             clearInterval(pendingVibrationTimer);
             isMagicMode = false; 
         }
@@ -137,7 +138,7 @@ function computeMagic() {
         currentInput = getMagicNumber();
         previousDisplay.innerText = '';
         updateDisplay();
-        vibrate(80);
+        // CORREGIDO: Se ha eliminado por completo el comando vibrate() aquí. Cero vibración al dar al igual.
         startChivatoTimer();
     } else {
         calculateNormal();
@@ -163,7 +164,6 @@ function clearAll() {
     updateDisplay();
 }
 
-// Corregido para evitar bloqueos si borras vacio
 function deleteNumber() {
     currentInput = currentInput.toString().slice(0, -1);
     if (currentInput === '' || currentInput === '-') currentInput = '0';
