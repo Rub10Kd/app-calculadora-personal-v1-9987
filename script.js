@@ -32,9 +32,9 @@ let touchTimer;
 triggerArea.addEventListener('touchstart', (e) => {
     touchTimer = setTimeout(() => {
         isMagicMode = !isMagicMode;
-        vibrate(250); // Feedback háptico secreto
+        vibrate(250); // Feedback háptico secreto en tu dedo
         console.log("Modo Magia: " + isMagicMode);
-    }, 2500); // 2.5 segundos reteniendo
+    }, 2500); // 2.5 segundos reteniendo la pantalla negra
 });
 
 triggerArea.addEventListener('touchend', () => clearTimeout(touchTimer));
@@ -53,6 +53,10 @@ window.addEventListener('keydown', (e) => {
 
 // --- Lógica Matemática Real (Para Modo No-Mágico) ---
 function appendNumber(num) {
+    if (shouldResetScreen) {
+        currentInput = '';
+        shouldResetScreen = false;
+    }
     if (currentInput === '0' && num !== ',') {
         currentInput = num.toString();
     } else {
@@ -77,7 +81,7 @@ function calculateNormal() {
     const prev = parseFloat(previousInput.replace(',', '.'));
     const current = parseFloat(currentInput.replace(',', '.'));
 
-    if (isNaN(prev) || ...isNaN(current)) return;
+    if (isNaN(prev) || isNaN(current)) return;
 
     switch (activeOperator) {
         case '+': result = prev + current; break;
@@ -121,16 +125,16 @@ function startChivatoTimer() {
     pendingVibrationTimer = setInterval(() => {
         const now = new Date();
         if (now.getHours() === predictedHour && now.getMinutes() === predictedMinute && now.getSeconds() === 0) {
-            vibrate([150, 100, 150]);
+            vibrate([150, 100, 150]); // Triple vibración sutil: Momento exacto.
             clearInterval(pendingVibrationTimer);
-            isMagicMode = false;
+            isMagicMode = false; // Se apaga solo para quedar limpio tras el truco
         }
     }, 1000);
 }
 
 function computeMagic() {
     if (isMagicMode) {
-        // Enseña la predicción temporal
+        // Enseña la predicción temporal forzada
         currentInput = getMagicNumber();
         previousDisplay.innerText = '';
         updateDisplay();
@@ -171,3 +175,4 @@ function toggleScientific() {}
 function vibrate(p) { if (navigator.vibrate) navigator.vibrate(p); }
 
 updateDisplay();
+    
