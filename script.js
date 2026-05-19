@@ -15,7 +15,7 @@ let pendingVibrationTimer = null;
 let predictedHour = null;
 let predictedMinute = null;
 
-// --- Auto-ajuste de tamaño de fuente (Solución al número gigante) ---
+// --- Auto-ajuste de tamaño de fuente ---
 function adjustFontSize() {
     const textLength = currentDisplay.innerText.length;
     if (textLength > 11) {
@@ -32,7 +32,7 @@ let touchTimer;
 triggerArea.addEventListener('touchstart', (e) => {
     touchTimer = setTimeout(() => {
         isMagicMode = !isMagicMode;
-        vibrate(250); // Feedback háptico secreto en tu dedo
+        vibrate(250); // Feedback háptico secreto
         console.log("Modo Magia: " + isMagicMode);
     }, 2500); // 2.5 segundos reteniendo la pantalla negra
 });
@@ -125,23 +125,21 @@ function startChivatoTimer() {
     pendingVibrationTimer = setInterval(() => {
         const now = new Date();
         if (now.getHours() === predictedHour && now.getMinutes() === predictedMinute && now.getSeconds() === 0) {
-            vibrate([150, 100, 150]); // Triple vibración sutil: Momento exacto.
+            vibrate([150, 100, 150]); // Triple vibración sutil
             clearInterval(pendingVibrationTimer);
-            isMagicMode = false; // Se apaga solo para quedar limpio tras el truco
+            isMagicMode = false; 
         }
     }, 1000);
 }
 
 function computeMagic() {
     if (isMagicMode) {
-        // Enseña la predicción temporal forzada
         currentInput = getMagicNumber();
         previousDisplay.innerText = '';
         updateDisplay();
         vibrate(80);
         startChivatoTimer();
     } else {
-        // Ejecuta matemáticas reales convencionales
         calculateNormal();
         updateDisplay();
     }
@@ -165,6 +163,7 @@ function clearAll() {
     updateDisplay();
 }
 
+// Corregido para evitar bloqueos si borras vacio
 function deleteNumber() {
     currentInput = currentInput.toString().slice(0, -1);
     if (currentInput === '' || currentInput === '-') currentInput = '0';
@@ -175,4 +174,3 @@ function toggleScientific() {}
 function vibrate(p) { if (navigator.vibrate) navigator.vibrate(p); }
 
 updateDisplay();
-    
